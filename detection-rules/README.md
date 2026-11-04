@@ -4,7 +4,7 @@
 
 This folder holds the custom Wazuh detection rules the Blue Team wrote to catch the Red Team's attack.
 
-> **In plain English:** Wazuh's built-in rules noticed the attack but rated it low (Level 5), which is easy to miss. We wrote our own rules so the same activity raises a clear, high-priority alarm (Level 10 and Level 12).
+> Wazuh's built-in rules noticed the attack but rated it low (Level 5), which is easy to miss. We wrote our own rules so the same activity raises a clear, high-priority alarm (Level 10 and Level 12).
 
 ---
 
