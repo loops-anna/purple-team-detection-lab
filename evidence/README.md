@@ -1,1 +1,20 @@
 # Evidence (Red + Blue) + Screenshots and test evidence
+<img width="977" height="777" alt="fig10-stage2-rule-100100-hits" src="https://github.com/user-attachments/assets/f5460180-767d-4f84-a0c2-188b98f3b849" />
+<img width="1643" height="807" alt="fig09-stage2-dashboard-default-and-custom" src="https://github.com/user-attachments/assets/6b464e6b-be6c-4b94-96ee-81db0a4733be" />
+<img width="1324" height="275" alt="fig08-stage2-kali-journal-failed-logins" src="https://github.com/user-attachments/assets/d719bacd-7ecc-4ae7-8b13-f2939a6849d8" />
+<img width="817" height="441" alt="fig07-stage2-ssh-login-attempts" src="https://github.com/user-attachments/assets/7e47c55b-6ad2-4e3f-80bd-dc18a88726a1" />
+<img width="809" height="312" alt="fig06-stage1-nmap-recon" src="https://github.com/user-attachments/assets/bbbd8174-9117-4796-a769-38b47dec9120" />
+<img width="1322" height="724" alt="fig05-kali-ssh-and-time-settings" src="https://github.com/user-attachments/assets/c5bee51b-d192-43a0-8dc8-1baf9c098162" />
+<img width="1202" height="814" alt="fig04-kali-ip-agent-running" src="https://github.com/user-attachments/assets/5191c33b-42a5-4770-bd81-666ee9ba7e07" />
+<img width="855" height="140" alt="fig03-kali-agent-active" src="https://github.com/user-attachments/assets/b84d3f32-af77-4c77-8384-e4c68b159e2e" />
+<img width="997" height="809" alt="fig02-ubuntu-indexer-dashboard-running" src="https://github.com/user-attachments/assets/6b864139-029b-492e-8097-7ce2d94de356" />
+<img width="1225" height="834" alt="fig01-ubuntu-wazuh-manager-running" src="https://github.com/user-attachments/assets/44e9835c-0ea8-44e1-bb2a-41e8885f5ee9" />
+<img width="864" height="110" alt="fig18-response-connection-timeout" src="https://github.com/user-attachments/assets/b0e27f72-58ca-4366-978e-99cf5bde2e96" />
+<img width="712" height="492" alt="fig17-response-ufw-deny-rule" src="https://github.com/user-attachments/assets/c037e932-4316-4978-87a9-668339cf1e4a" />
+<img width="860" height="529" alt="fig16-wazuh-logtest-100102" src="https://github.com/user-attachments/assets/acb1b986-7f3f-4fbe-a3cd-512e8df26277" />
+<img width="1131" height="729" alt="fig15-local-rules-xml" src="https://github.com/user-attachments/assets/5bdd0e68-7381-449b-b41f-7920840d4be4" />
+<img width="981" height="655" alt="fig14-stage3-rule-100102-level12" src="https://github.com/user-attachments/assets/d1126a83-475b-4f06-958e-fd69bffdedf2" />
+<img width="1716" height="392" alt="fig13-stage3-journal-marker" src="https://github.com/user-attachments/assets/ce0958c5-2ab6-494d-8efd-be9bb1d6764e" />
+<img width="811" height="188" alt="fig12-stage3-logger-marker" src="https://github.com/user-attachments/assets/ca0d6cb2-23d8-4c48-aa60-24dcc93616ad" />
+<img width="983" height="569" alt="fig11-stage2-rule-100101-level10" src="https://github.com/user-attachments/assets/1fa1d623-b017-46b4-a897-2768d35556a2" />
+<img width="977" height="777" alt="fig10-stage2-rule-100100-hits" src="https://github.com/user-attachments/assets/ab8c3023-5532-4837-a8dc-7085fc916382" />
