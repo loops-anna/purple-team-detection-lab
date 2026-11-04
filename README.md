@@ -4,7 +4,7 @@
 
 A controlled purple-team exercise in an isolated VirtualBox lab. The Red Team simulates a three-stage attack (reconnaissance → SSH password guessing → simulated log tampering). The Blue Team detects every stage with **custom Wazuh rules** (Level 10 and Level 12), then blocks the attacker with a **UFW firewall rule**.
 
-> **In plain English:**We built a safe practice network, had half the team act as hackers, and showed that free monitoring software (Wazuh) can spot the attack, raise a high-priority alarm, and help defenders lock the attacker out.
+> We built a safe practice network, had half the team act as hackers, and showed that free monitoring software (Wazuh) can spot the attack, raise a high-priority alarm, and help defenders lock the attacker out.
 
 ---
 
