@@ -17,7 +17,7 @@ A Red Team / Blue Team detection lab using Wazuh: a controlled attack simulation
 | **Red Team (attack simulation)**    | Hauwa Onize Ikunaiye • Theodora Fouda Tsilla Etobe                    |
 | **Blue Team (defence & detection)** | Nunoo Annah Frimpomaah • Thobile Mahlangu                             |
 | **Project Documentation**           | Destiny Awambeng                                                      |
-| **Project repository**              | github.com/hauwaonizeikunaiye-max/purple-team-detection-lab (private) |
+| **Project repository**              | github.com/hauwaonizeikunaiye-max/purple-team-detection-lab (public) |
 | **Date**                            | November 2026                                                         |
 
 *Academic / training use only • All testing performed on team-owned virtual machines*
