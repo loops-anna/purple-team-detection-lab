@@ -1,9 +1,6 @@
+# Catching an Attack in Action
 
-**TECH MENTORSHIP PROGRAM 2026**
-
-Cybersecurity Track • Final Project Report
-
-**Catching an Attack in Action**
+**Tech Mentorship Program 2026 · Cybersecurity Track · Final Project Report**
 
 A Red Team / Blue Team detection lab using Wazuh: a controlled attack simulation, custom detection rules and firewall containment
 
@@ -11,60 +8,40 @@ A Red Team / Blue Team detection lab using Wazuh: a controlled attack simulation
 
 **Environment:** Isolated VirtualBox lab. No real or production systems were touched.
 
-|                                     |                                                                       |
-|-------------------------------------|-----------------------------------------------------------------------|
+| Role | Team member |
+|---|---|
 | **Team Lead**                       | Nunoo Annah Frimpomaah                                                |
 | **Red Team (attack simulation)**    | Hauwa Onize Ikunaiye • Theodora Fouda Tsilla Etobe                    |
 | **Blue Team (defence & detection)** | Nunoo Annah Frimpomaah • Thobile Mahlangu                             |
 | **Project Documentation**           | Destiny Awambeng                                                      |
-| **Project repository**              | github.com/hauwaonizeikunaiye-max/purple-team-detection-lab (public) |
+| **Project repository**              | github.com/hauwaonizeikunaiye-max/purple-team-detection-lab (private) |
 | **Date**                            | November 2026                                                         |
 
 *Academic / training use only • All testing performed on team-owned virtual machines*
 
-# Contents
+## Contents
 
-1\. Project at a glance (plain-English summary)
-
-2\. Executive summary
-
-3\. The problem we addressed
-
-4\. Scope, safety rules and limitations
-
-5\. How the lab was built
-
-6\. Our approach (methodology)
-
-7\. The attack and what we detected, stage by stage
-
-8\. Custom Wazuh detection rules
-
-9\. Response: blocking the attacker
-
-10\. Findings summary
-
-11\. Detailed findings
-
-12\. Recommendations
-
-13\. Testing, validation and how to reproduce safely
-
-14\. Conclusion and lessons learned
-
-15\. Team contributions
-
-Appendix A: Custom rules file (local_rules.xml)
-
-Appendix B: Commands used
-
-Appendix C: How this report meets the project requirements
-
-Appendix D: Figure register
-
-Appendix E: Glossary for non-technical readers
-
-References
+- [1. Project at a glance](#1-project-at-a-glance)
+- [2. Executive summary](#2-executive-summary)
+- [3. The problem we addressed](#3-the-problem-we-addressed)
+- [4. Scope, safety rules and limitations](#4-scope-safety-rules-and-limitations)
+- [5. How the lab was built](#5-how-the-lab-was-built)
+- [6. Our approach (methodology)](#6-our-approach-methodology)
+- [7. The attack and what we detected, stage by stage](#7-the-attack-and-what-we-detected-stage-by-stage)
+- [8. Custom Wazuh detection rules](#8-custom-wazuh-detection-rules)
+- [9. Response: blocking the attacker](#9-response-blocking-the-attacker)
+- [10. Findings summary](#10-findings-summary)
+- [11. Detailed findings](#11-detailed-findings)
+- [12. Recommendations](#12-recommendations)
+- [13. Testing, validation and how to reproduce safely](#13-testing-validation-and-how-to-reproduce-safely)
+- [14. Conclusion and lessons learned](#14-conclusion-and-lessons-learned)
+- [15. Team contributions](#15-team-contributions)
+- [Appendix A: Custom rules file (local_rules.xml)](#appendix-a-custom-rules-file-local_rulesxml)
+- [Appendix B: Commands used](#appendix-b-commands-used)
+- [Appendix C: How this report meets the project requirements](#appendix-c-how-this-report-meets-the-project-requirements)
+- [Appendix D: Figure register](#appendix-d-figure-register)
+- [Appendix E: Glossary for non-technical readers](#appendix-e-glossary-for-non-technical-readers)
+- [References](#references)
 
 # 1. Project at a glance
 
@@ -101,15 +78,15 @@ The lab used an Ubuntu virtual machine (192.168.17.130) as the Wazuh server and 
 
 ### Key outcomes
 
-- **Visibility:** the Kali agent (ID 001) was registered and Active, and all of its security events reached the Wazuh server.
+- **Visibility:** The Kali agent (ID 001) was registered and Active, and all of its security events reached the Wazuh server.
 
-- **Reconnaissance:** a scan of ports 21, 22 and 80 showed that only SSH (port 22) was open. This became the attack path.
+- **Reconnaissance:** A scan of ports 21, 22, and 80 showed that only SSH (port 22) was open. This became the attack path.
 
 - **Password-guessing detection:** custom Rule 100100 recorded each failed SSH login (19 events in 24 hours), and custom Rule 100101 raised a **Level 10** alert when three failures came from the same source within 120 seconds.
 
 - **Log-tampering detection:** custom Rule 100102 raised a **Level 12** alert, mapped to MITRE ATT&CK T1070.002, every time the simulated tampering marker was written. It fired four separate times, which shows the result can be repeated.
 
-- **Containment:** a UFW firewall rule on Kali denied the attacking address access to SSH. A connection test from the attacker then timed out, which confirms the block worked.
+- **Containment:** A UFW firewall rule on Kali denied the attacking address access to SSH. A connection test from the attacker then timed out, which confirms the block worked.
 
 ### What this means
 
@@ -119,7 +96,7 @@ For a small financial-services organisation with no 24-hour security team, the p
 
 ## 3.1 Case study: Asempa Community Microfinance Ltd. (fictional)
 
-Asempa is an imaginary small microfinance company with a head office, a small operations team and a limited IT budget. It stores customer contact details, identity-verification records, loan applications and repayment records. Its IT staff manage servers remotely using SSH. There is no dedicated Security Operations Centre (SOC), so security is monitored alongside other daily work.
+Asempa is an imaginary small microfinance company with a head office, a small operations team and a limited IT budget. It stores customer contact details, identity-verification records, loan applications, and repayment records. Its IT staff manages servers remotely using SSH. There is no dedicated Security Operations Centre (SOC), so security is monitored alongside other daily work.
 
 Management is worried that someone could quietly guess a staff password, get into an internal server, and then delete the logs that would show what they did, all without anyone noticing until the damage is done.
 
@@ -145,15 +122,15 @@ Management is worried that someone could quietly guess a staff password, get int
 
 ## 4.1 In scope (what we tested)
 
-- Ubuntu VM at 192.168.17.130: Wazuh manager, indexer and dashboard. This VM was also used by the Red Team to launch the simulated attack.
+- Ubuntu VM at 192.168.17.130: Wazuh manager, indexer, and dashboard. This VM was also used by the Red Team to launch the simulated attack.
 
 - Kali Linux VM at 192.168.17.129: the protected computer running the Wazuh agent (agent ID 001) and the SSH service.
 
 - A private VirtualBox network (192.168.17.0/24) connecting only these two machines.
 
-- Ports 21 (FTP), 22 (SSH) and 80 (HTTP) on the Kali VM.
+- Ports 21 (FTP), 22 (SSH), and 80 (HTTP) on the Kali VM.
 
-- Wazuh custom rules, Wazuh alerts and the UFW firewall on the Kali VM.
+- Wazuh custom rules, Wazuh alerts, and the UFW firewall on the Kali VM.
 
 ## 4.2 Safety rules we followed
 
@@ -165,18 +142,18 @@ Management is worried that someone could quietly guess a staff password, get int
 
 - No real malware was used, and no real data was copied out.
 
-- No passwords, tokens or private keys are shown in this report or the repository.
+- No passwords, tokens, or private keys are shown in this report or the repository.
 
 ## 4.3 Limitations
 
 - The lab has only two machines. It does not represent a full company network.
 
-- For simplicity, the Ubuntu VM was both the Wazuh server and the attack machine. In a real setting the attacker would be a separate, untrusted machine.
+- For simplicity, the Ubuntu VM was both the Wazuh server and the attack machine. In a real setting, the attacker would be a separate, untrusted machine.
 - The Red Team ran each attack stage as a separate command rather than one automated attack_playbook.sh script.
 
 - The firewall block was applied by the Blue Team after the alert was raised. Making this block happen automatically is the next improvement (see Section 12).
 
-- Full raw-event archiving in Wazuh was switched off (logall = no), so evidence comes from alerts, the dashboard and the endpoint's own logs.
+- Full raw-event archiving in Wazuh was switched off (logall = no), so evidence comes from alerts, the dashboard, and the endpoint's own logs.
 
 - The Kali VM's clock was not synchronised to a time server, so timestamps between machines may differ by a few seconds (see Finding F-05).
 
@@ -202,31 +179,31 @@ The lab runs entirely inside VirtualBox on one host computer. The diagram below 
 
 ## 5.1 Evidence that the lab was working
 
-![Figure 1: Ubuntu server IP address and Wazuh manager running](evidence/fig01-ubuntu-wazuh-manager-running.png)
+![Figure 1: Ubuntu server IP address and Wazuh manager running](../evidence/fig01-ubuntu-wazuh-manager-running.png)
 
 **Figure 1. Ubuntu server IP address and Wazuh manager running**
 
 ***What it shows:** The Ubuntu VM has IP 192.168.17.130 and the Wazuh manager service is "active (running)". This is the central brain that applies rules and creates alerts.*
 
-![Figure 2: Wazuh indexer and dashboard running on Ubuntu](evidence/fig02-ubuntu-indexer-dashboard-running.png)
+![Figure 2: Wazuh indexer and dashboard running on Ubuntu](../evidence/fig02-ubuntu-indexer-dashboard-running.png)
 
 **Figure 2. Wazuh indexer and dashboard running on Ubuntu**
 
 ***What it shows:** The indexer (stores alerts) and the dashboard (the web screen analysts use) are both "active (running)", so the full Wazuh platform is up.*
 
-![Figure 3: Kali agent registered and Active on the Wazuh manager](evidence/fig03-kali-agent-active.png)
+![Figure 3: Kali agent registered and Active on the Wazuh manager](../evidence/fig03-kali-agent-active.png)
 
 **Figure 3. Kali agent registered and Active on the Wazuh manager**
 
 ***What it shows:** The manager lists agent 001 "kali" as Active, which means the protected computer is connected and sending its logs.*
 
-![Figure 4: Kali IP address and Wazuh agent running](evidence/fig04-kali-ip-agent-running.png)
+![Figure 4: Kali IP address and Wazuh agent running](../evidence/fig04-kali-ip-agent-running.png)
 
 **Figure 4. Kali IP address and Wazuh agent running**
 
 ***What it shows:** On the protected computer itself, the IP is 192.168.17.129 and the Wazuh agent (v4.14.9) is "active (running)", including its log collector.*
 
-![Figure 5: Kali SSH service running and system time settings](evidence/fig05-kali-ssh-and-time-settings.png)
+![Figure 5: Kali SSH service running and system time settings](../evidence/fig05-kali-ssh-and-time-settings.png)
 
 **Figure 5. Kali SSH service running and system time settings**
 
@@ -280,7 +257,7 @@ We followed a simple purple-team cycle. The Red Team attacks, the Blue Team watc
 
 **Plain English:** before breaking in, an attacker checks which "doors" (network ports) on a computer are open. We checked three common doors: FTP (21), SSH (22) and HTTP (80).
 
-![Figure 6: Nmap scan of the Kali VM on ports 21, 22 and 80](evidence/fig06-stage1-nmap-recon.png)
+![Figure 6: Nmap scan of the Kali VM on ports 21, 22 and 80](../evidence/fig06-stage1-nmap-recon.png)
 
 **Figure 6. Nmap scan of the Kali VM on ports 21, 22 and 80**
 
@@ -296,31 +273,31 @@ We followed a simple purple-team cycle. The Red Team attacks, the Blue Team watc
 
 **Plain English:** the attacker repeatedly tries to log in, hoping to guess a password. Each wrong guess leaves a line in the computer's log. One wrong guess is normal (people mistype). Several in a short time is a warning sign.
 
-![Figure 7: Red Team's repeated SSH login attempts from Ubuntu](evidence/fig07-stage2-ssh-login-attempts.png)
+![Figure 7: Red Team's repeated SSH login attempts from Ubuntu](../evidence/fig07-stage2-ssh-login-attempts.png)
 
 **Figure 7. Red Team's repeated SSH login attempts from Ubuntu**
 
 ***What it shows:** Five password-only login attempts to Kali as "invaliduser". Each one is refused with "Permission denied". This creates the failed-login trail for Wazuh to detect.*
 
-![Figure 8: Kali's own SSH log recording the failed logins](evidence/fig08-stage2-kali-journal-failed-logins.png)
+![Figure 8: Kali's own SSH log recording the failed logins](../evidence/fig08-stage2-kali-journal-failed-logins.png)
 
 **Figure 8. Kali's own SSH log recording the failed logins**
 
 ***What it shows:** Kali's journal shows "Invalid user" and "Failed password ... from 192.168.17.130". This is the raw evidence that the Wazuh agent sends to the server.*
 
-![Figure 9: Wazuh dashboard: default alerts alongside the custom rule](evidence/fig09-stage2-dashboard-default-and-custom.png)
+![Figure 9: Wazuh dashboard: default alerts alongside the custom rule](../evidence/fig09-stage2-dashboard-default-and-custom.png)
 
 **Figure 9. Wazuh dashboard: default alerts alongside the custom rule**
 
 ***What it shows:** Default Wazuh rules 5710 (non-existent user) and 5503 (PAM login failed) appear at only Level 5. Our custom rule 100100 "TEAM BLUE: SSH failed password attempt recorded" also fires on each attempt.*
 
-![Figure 10: Custom Rule 100100: every failed SSH password attempt](evidence/fig10-stage2-rule-100100-hits.png)
+![Figure 10: Custom Rule 100100: every failed SSH password attempt](../evidence/fig10-stage2-rule-100100-hits.png)
 
 **Figure 10. Custom Rule 100100: every failed SSH password attempt**
 
 ***What it shows:** Searching rule.id 100100 returns 19 hits from agent "kali" in 24 hours, all Level 5. Each failed login is captured by our own rule.*
 
-![Figure 11: Custom Rule 100101: Level 10 alert for repeated failures](evidence/fig11-stage2-rule-100101-level10.png)
+![Figure 11: Custom Rule 100101: Level 10 alert for repeated failures](../evidence/fig11-stage2-rule-100101-level10.png)
 
 **Figure 11. Custom Rule 100101: Level 10 alert for repeated failures**
 
@@ -334,19 +311,19 @@ We followed a simple purple-team cycle. The Red Team attacks, the Blue Team watc
 
 **Plain English:** after getting in, real attackers often try to delete the logs that show what they did, like wiping fingerprints. To stay safe, we did **not** delete any real logs. Instead, we wrote a clearly labelled test message into the system log that stands in for a tampering attempt, and checked that Wazuh raised an alarm.
 
-![Figure 12: Writing the harmless log-tampering marker on Kali](evidence/fig12-stage3-logger-marker.png)
+![Figure 12: Writing the harmless log-tampering marker on Kali](../evidence/fig12-stage3-logger-marker.png)
 
 **Figure 12. Writing the harmless log-tampering marker on Kali**
 
 ***What it shows:** The logger command writes the test message "WAZUH LAB: Simulated authentication log tampering activity" into Kali's system journal. Nothing is deleted.*
 
-![Figure 13: Kali journal confirming the marker was recorded](evidence/fig13-stage3-journal-marker.png)
+![Figure 13: Kali journal confirming the marker was recorded](../evidence/fig13-stage3-journal-marker.png)
 
 **Figure 13. Kali journal confirming the marker was recorded**
 
 ***What it shows:** journalctl shows the WAZUH LAB marker with exact timestamps (e.g. 2026-11-04 10:46:57 and 11:08:54). This proves the event exists on the endpoint before Wazuh sees it.*
 
-![Figure 14: Wazuh dashboard: Rule 100102 Level 12 alerts](evidence/fig14-stage3-rule-100102-level12.png)
+![Figure 14: Wazuh dashboard: Rule 100102 Level 12 alerts](../evidence/fig14-stage3-rule-100102-level12.png)
 
 **Figure 14. Wazuh dashboard: Rule 100102 Level 12 alerts**
 
@@ -364,7 +341,7 @@ The Team Blue brief requires custom rules written in local_rules.xml that flag t
 | 100101      | 10        | Three failed SSH logins from the same IP address within 120 seconds (password guessing) | T1110 Brute Force                        | Met: Level 10 alert    |
 | 100102      | 12        | The simulated log-tampering message on the endpoint                                     | T1070.002 Clear Linux or Mac System Logs | Met: 4 Level 12 alerts |
 
-![Figure 15: The custom rules inside local_rules.xml on the Wazuh manager](evidence/fig15-local-rules-xml.png)
+![Figure 15: The custom rules inside local_rules.xml on the Wazuh manager](../evidence/fig15-local-rules-xml.png)
 
 **Figure 15. The custom rules inside local_rules.xml on the Wazuh manager**
 
@@ -382,7 +359,7 @@ The Team Blue brief requires custom rules written in local_rules.xml that flag t
 
 We tested the rules in two ways. First, the Wazuh configuration test (wazuh-analysisd -t) returned exit code 0, which means the rules file had no syntax errors. Second, we pasted the test message into wazuh-logtest, the Wazuh tool that shows which rule a log line would trigger.
 
-![Figure 16: wazuh-logtest confirming Rule 100102 matches](evidence/fig16-wazuh-logtest-100102.png)
+![Figure 16: wazuh-logtest confirming Rule 100102 matches](../evidence/fig16-wazuh-logtest-100102.png)
 
 **Figure 16. wazuh-logtest confirming Rule 100102 matches**
 
@@ -402,13 +379,13 @@ sudo ufw status verbose
 nc -vz -w 5 192.168.17.129 22
 ```
 
-![Figure 17: UFW firewall active on Kali with the deny rule](evidence/fig17-response-ufw-deny-rule.png)
+![Figure 17: UFW firewall active on Kali with the deny rule](../evidence/fig17-response-ufw-deny-rule.png)
 
 **Figure 17. UFW firewall active on Kali with the deny rule**
 
 ***What it shows:** UFW is active with default deny for incoming traffic, and rule \[1\] "22/tcp DENY IN 192.168.17.130" blocks the attacker from SSH.*
 
-![Figure 18: Attacker's connection attempt now times out](evidence/fig18-response-connection-timeout.png)
+![Figure 18: Attacker's connection attempt now times out](../evidence/fig18-response-connection-timeout.png)
 
 **Figure 18. Attacker's connection attempt now times out**
 
