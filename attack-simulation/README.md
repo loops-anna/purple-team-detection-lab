@@ -1,19 +1,10 @@
 # Attack Simulation (Red Team)
 
-**Team Red:** Hauwa · Theodora Fouda Tsilla Etobe
+**Team Red:** Hauwa Onize Ikunaiye · Theodora Fouda Tsilla Etobe
 
-This folder holds the Red Team's attack script and its documentation for the purple-team Wazuh detection lab.
+This folder documents how the Red Team carried out the three attack stages in the purple-team Wazuh detection lab. Each stage was run by hand as a separate command; there is no single automated script.
 
-> **In plain English:** the Red Team played the role of an attacker group, but only inside our own private lab. They looked for open doors, tried to guess a login, and pretended to cover their tracks, so the Blue Team could prove Wazuh would catch each step.
-
----
-
-## Files in this folder
-
-| File | What it is |
-|---|---|
-| `attack_playbook.sh` | Red Team script that walks through the three attack stages and records each one in a log file |
-| `README.md` | This file: purpose, logic, tool arguments, AI prompts and evidence |
+> The Red Team played the role of an attacker group, but only inside our own private lab. They looked for open doors, tried to guess a login, and pretended to cover their tracks, so the Blue Team could prove Wazuh would catch each step.
 
 ---
 
@@ -25,20 +16,6 @@ This folder holds the Red Team's attack script and its documentation for the pur
 | Target | Kali VM `192.168.17.129` (team-owned, isolated VirtualBox network) |
 | Launched from | Ubuntu VM `192.168.17.130` |
 | Safety | No public or third-party systems, non-existent username only, no real logs deleted, no malware, no real data moved |
-
----
-
-## How the script works
-
-`attack_playbook.sh` creates a folder `~/red-team-lab/` and writes a timestamped entry to `attack_simulation.log` for each stage, so the team has a record of what was simulated and when.
-
-The **actual lab activity** for each stage was carried out with the commands in the next section. The screenshots in `evidence/` come from those commands, not from the script's log.
-
-Run it inside the lab only:
-```bash
-chmod +x attack_playbook.sh
-./attack_playbook.sh
-```
 
 ---
 
@@ -80,4 +57,5 @@ chmod +x attack_playbook.sh
 
 - Lab-only: two virtual machines on a private network.
 - Stage 3 was simulated with a test message; no real logs were changed.
+- The stages were run as separate commands, not as one automated `attack_playbook.sh` script.
 - The mock file-transfer part of Stage 3 was not used as evidence in the final report.
